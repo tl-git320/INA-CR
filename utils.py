@@ -6,7 +6,7 @@ from sklearn.metrics import roc_auc_score, precision_recall_fscore_support
 
 DATA_DIM = 3*64*64
 OUTLIER_RATE = 0.15
-data_root_path = '../datasets/'
+data_root_path = './datasets/'
 
 
 def get_view_fea(NUM_VIEWS):

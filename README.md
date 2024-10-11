@@ -12,6 +12,7 @@ torchaudio==0.13.0
 numpy=1.24.4
 ```
 # Training
-python main.py
+1.Unzip the compressed package in datasets to ./datasets
+2.python main.py
 
-# After the journal paper is accepted, we will open-source the training and model codes.
+

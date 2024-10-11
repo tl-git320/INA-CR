@@ -18,7 +18,6 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 def run(data_path, dataset_name, batch_size, learning_rate, k_neibs, module_weight, albation_set, num_rounds=20,
         num_epochs=5, num_views=2):
     print('#########  LocalAE conducted on ' + dataset_name)
-    # print(torch.cuda.get_device_name(0))
 
     logging.basicConfig(level=logging.INFO, filename='running_log')
     print(torch.cuda.is_available())
@@ -55,7 +54,7 @@ def run(data_path, dataset_name, batch_size, learning_rate, k_neibs, module_weig
         de_nets[v] = GeneratorDecode(e[v] - s[v])
         prediction_nets[v] = Prediction(e[v] - s[v])
 
-    Trainer = MyTrainer(optimizer_name='adam',
+    Trainer = MyTrainer(optimizer_name='amsgrad',
                         lr=learning_rate,
                         n_epochs=num_epochs,
                         lr_milestones=tuple(()),
@@ -133,13 +132,7 @@ if __name__ == '__main__':
         os.remove(file_path2)
 
     start_time = time.time()
-    for j in [3]:
-        for k in ['tiny-imagenet-1000-3-0.08-0.02-0.05', 'tiny-imagenet-1000-3-0.05-0.02-0.08',
-                  'tiny-imagenet-1000-3-0.08-0.05-0.02',
-                  'tiny-imagenet-1000-3-0.05-0.05-0.05', 'tiny-imagenet-1000-3-0.02-0.05-0.08',
-                  'tiny-imagenet-1000-3-0.05-0.08-0.02',
-                  'tiny-imagenet-1000-3-0.02-0.08-0.05',
-                  ]:
+    for k in ['tiny-imagenet-1000-3-0.08-0.02-0.05', 'tiny-imagenet-1000-3-0.05-0.02-0.08']:
             start_epoch_time = time.time()
             total_auc = []
             total_f1 = []
@@ -158,17 +151,8 @@ if __name__ == '__main__':
             print(np.mean(total_auc), np.mean(total_f1))
             with open(file_path, 'a') as file:
                 file.write('=============================================================================\n')
-                file.write(str(j) + '\n')
                 file.write(str(k) + '\n')
                 file.write(str(np.mean(total_auc)) + '\n')
-                file.write(str(np.mean(total_f1)) + '\n')
-            with open(file_path1, 'a') as file:
-                if k == 'tiny-imagenet-1000-3-0.08-0.02-0.05':
-                    file.write(str(j) + '===================================' + '\n')
-                file.write(str(np.mean(total_auc)) + '\n')
-            with open(file_path2, 'a') as file:
-                if k == 'tiny-imagenet-1000-3-0.08-0.02-0.05':
-                    file.write(str(j) + '===================================' + '\n')
                 file.write(str(np.mean(total_f1)) + '\n')
             all_epoch_time = time.time() - start_epoch_time
             print(all_epoch_time)

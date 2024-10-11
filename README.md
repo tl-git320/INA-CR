@@ -1,5 +1,5 @@
 # INA-CR
-The official code for "Multi-View Anomaly Detection via Hybrid Instance-Neighborhood Aligning and Cross-View Reasoning" paper (submitted to Multimedia Systems).
+The official code for "Multi-View Anomaly Detection via Hybrid Instance-Neighborhood Aligning and Cross-View Reasoning" paper.
 
 # Requirements
 ```

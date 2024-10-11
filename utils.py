@@ -6,15 +6,10 @@ from sklearn.metrics import roc_auc_score, precision_recall_fscore_support
 
 DATA_DIM = 3*64*64
 OUTLIER_RATE = 0.15
-data_root_path = '../datasets/'
+data_root_path = './datasets/'
 
 
 def get_view_fea(NUM_VIEWS):
-    '''
-    该函数的作用是将总体特征维度DATA_DIM平分到NUM_VIEWS个视图中,
-    其中前面几个视图具有平均的特征维度avg_num,最后几个视图具有avg_num+1的特征维度,
-    :return: s, e 返回每个视图对应的特征维度起始索引s和结束索引e
-    '''
     avg_num = int(DATA_DIM / NUM_VIEWS)
     # left_num = DATA_DIM % NUM_VIEWS
     fea_num = [avg_num for a in range(NUM_VIEWS)]

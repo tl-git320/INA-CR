@@ -12,7 +12,6 @@ torchaudio==0.13.0
 numpy=1.24.4
 ```
 # Training
-1.Unzip the compressed package in datasets to ./datasets
-2.python main.py
+Unzip the compressed package in datasets to ./datasets， then python main.py
 
 
